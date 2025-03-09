@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>I'm Motivateddddddd as fuck!</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        img {
+            max-width: 80%;
+            height: auto;
+        }
+        .company-name {
+            position: relative;
+            top: 110px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 class="company-name">Company Name</h1>
+        <img src="https://dp0rksi384o97.cloudfront.net/exports/658fd24b-2127-4156-a34d-69b833a80d07.gif" alt="Je suis super motivé !">
+    </div>
+</body>
+<script>
+    function getQueryParam(name) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(name) || "Beta System";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const companyName = getQueryParam("company");
+        const companyElement = document.querySelector(".company-name");
+        const gif = document.querySelector("img");
+
+        companyElement.textContent = companyName;
+        
+        gif.onload = function () {
+            companyElement.style.opacity = "1";
+        };
+
+        setTimeout(() => {
+            if (companyElement.style.opacity === "0") {
+                companyElement.style.opacity = "1";
+            }
+        }, 1000);
+    });
+</script>
+</html>
