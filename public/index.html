@@ -32,7 +32,7 @@
 <body>
     <div>
         <h1 class="company-name">Company Name</h1>
-        <img src="./me.gif" alt="I'm Motivateddddddd as fuck!">
+        <img src="./motivation.gif" alt="I'm Motivateddddddd as fuck!">
     </div>
 </body>
 <script>
@@ -52,11 +52,9 @@
             companyElement.style.opacity = "1";
         };
 
-        setTimeout(() => {
-            if (companyElement.style.opacity === "0") {
-                companyElement.style.opacity = "1";
-            }
-        }, 1000);
+        if (companyElement.style.opacity === "0") {
+            companyElement.style.opacity = "1";
+        }
     });
 </script>
 </html>
