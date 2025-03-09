@@ -48,12 +48,15 @@
 
         companyElement.textContent = companyName;
         
-        gif.onload = function () {
-            companyElement.style.opacity = "1";
-        };
 
-        if (companyElement.style.opacity === "0") {
+        function showCompanyName() {
             companyElement.style.opacity = "1";
+        }
+
+        if (gif.complete && gif.naturalHeight !== 0) {
+            showCompanyName();
+        } else {
+            gif.onload = showCompanyName;
         }
     });
 </script>
