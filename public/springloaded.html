@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Springloaded Application</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #051421 0%, #121C35 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            margin-bottom: 2rem;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .springloaded-logo {
+            height: 60px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 1rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: slideUp 0.8s ease-out 0.3s both;
+        }
+
+        .emoji-header {
+            font-size: 2rem;
+            animation: rotate 2s ease-in-out infinite alternate;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #2d3748;
+            background: linear-gradient(135deg, #051421, #121C35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: .5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: .5rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            justify-content: center;
+        }
+
+        .btn-resume {
+            background: #FFFFFF;
+            color: #051421;
+            border-color: #051421;
+        }
+
+        .btn-motivation {
+            background: #051421;
+            color: #FFFFFF;
+            border-color: #051421;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-resume:hover {
+            background: #051421;
+            color: #FFFFFF;
+        }
+
+        .btn-motivation:hover {
+            background: #FFFFFF;
+            color: #051421;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .fun-fact {
+            background: #2E0D36;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: .5rem;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .fun-fact h3 {
+            color: #FFFFFF;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .fun-fact p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.05);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.08);
+            top: 70%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.03);
+            top: 50%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3) translateY(-50px);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1) translateY(-25px);
+            }
+            100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(-10deg);
+            }
+            100% {
+                transform: rotate(10deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(-10px) rotate(240deg);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .main-card {
+                padding: 1rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="logo-container">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 127 26" aria-hidden="true" class="springloaded-logo">
+                <rect width="24" height="24" x="1" y="1" fill="#0D1C30" rx="4"></rect>
+                <rect width="24.75" height="24.75" x=".625" y=".625" stroke="url(#i475680957__a)" stroke-opacity=".3" stroke-width=".75" rx="4.375"></rect>
+                <path fill="#fff" d="M18.05 20.496c-.29 0-.579-.074-.846-.221l-10.107-5.69a1.629 1.629 0 0 1-.618-2.259c.467-.789 1.503-1.062 2.317-.603l10.107 5.69c.81.455 1.09 1.465.618 2.259a1.71 1.71 0 0 1-1.468.828l-.004-.004Zm.003-5.246c-.289 0-.578-.08-.845-.24L7.1 8.841c-.814-.493-1.09-1.588-.623-2.448.467-.855 1.508-1.146 2.317-.653l10.109 6.165c.81.493 1.09 1.588.618 2.448-.316.573-.885.897-1.468.897Zm-.457-6h.448c.945 0 1.706-.842 1.706-1.875S18.984 5.5 18.044 5.5h-5.587c-.21 0-.287.31-.103.423l5.242 3.327Zm-9.192 7.5h-.448c-.945 0-1.706.841-1.706 1.875S7.016 20.5 7.956 20.5h5.587c.21 0 .287-.31.103-.423L8.404 16.75Z"></path>
+                <path fill="#F8FAFC" d="M34 15.282h2.164c0 1 .627 1.486 1.85 1.486 1.098 0 1.616-.469 1.616-1.095 0-.782-.88-1.125-1.925-1.486-1.567-.56-3.492-1.19-3.492-3.502 0-2.095 1.738-3.19 3.558-3.19 1.911 0 3.696 1.108 3.696 3.533h-2.146c0-.952-.566-1.438-1.55-1.438-.893 0-1.411.452-1.411 1.095 0 .795.753 1.156 1.772 1.53 1.585.56 3.649 1.142 3.649 3.454 0 2.094-1.725 3.202-3.762 3.202-2.164 0-4.01-1.125-4.01-3.597l-.009.008Zm17.316-.534c0 2.329-1.725 4.128-3.823 4.128-1.145 0-1.977-.422-2.539-1.126v3.025a1.01 1.01 0 0 1-2.02 0V10.84h2.02v.908c.562-.704 1.394-1.125 2.539-1.125 2.098 0 3.822 1.799 3.822 4.128v-.004Zm-2.02 0c0-1.313-.924-2.203-2.178-2.203s-2.098.83-2.164 2.064v.282c.061 1.234.971 2.064 2.164 2.064 1.254 0 2.177-.89 2.177-2.203v-.004Zm7.463-4.063v2.25c-1.05-.125-2.147.344-2.147 1.86v3.863h-2.02v-7.817h2.02v1.173c.392-.92 1.189-1.33 2.147-1.33Zm.957.156h2.02v7.817h-2.02v-7.817Zm10.406 2.812v5.001h-2.02V13.81c0-.89-.531-1.312-1.237-1.312-.796 0-1.41.456-1.41 1.625v4.532h-2.02v-7.813h2.02v.795c.44-.656 1.158-1.016 2.129-1.016 1.459 0 2.538 1.125 2.538 3.033Zm9.466-2.812v7.44c0 2.563-2.05 3.719-4.01 3.719-1.959 0-3.9-1.095-3.9-3.129h2.02c0 .687.657 1.33 1.88 1.33 1.224 0 2.038-.687 2.038-1.925v-.826c-.566.735-1.428 1.174-2.6 1.174-2.085 0-3.805-1.782-3.805-4.002 0-2.22 1.725-4.002 3.806-4.002 1.175 0 2.038.452 2.6 1.186v-.97h1.971v.005Zm-1.972 3.785c0-1.234-.923-2.13-2.194-2.13-1.272 0-2.195.891-2.195 2.13 0 1.238.923 2.142 2.195 2.142 1.271 0 2.194-.89 2.194-2.142ZM80.231 7.4c.557 0 1.01.452 1.01 1.008v10.246h-2.02V8.412a1.01 1.01 0 0 1 1.01-1.008V7.4Zm2.299 7.348c0-2.33 1.833-4.128 4.136-4.128s4.154 1.799 4.154 4.128-1.85 4.128-4.154 4.128c-2.303 0-4.136-1.8-4.136-4.128Zm6.265 0c0-1.27-.923-2.16-2.133-2.16s-2.116.89-2.116 2.16c0 1.269.923 2.16 2.116 2.16s2.133-.892 2.133-2.16Zm9.453-1.061v4.971h-1.973v-.673c-.453.547-1.145.89-2.129.89-1.393 0-2.63-.83-2.63-2.468s1.237-2.455 2.63-2.455c.984 0 1.677.296 2.13.687v-.83c0-.921-.471-1.312-1.224-1.312s-1.206.39-1.206 1h-1.973c0-1.848 1.459-2.877 3.179-2.877 1.72 0 3.196 1.03 3.196 3.063v.004Zm-1.973 2.72c0-.595-.548-.969-1.44-.969-.893 0-1.303.409-1.303.97 0 .56.405.968 1.302.968s1.441-.404 1.441-.969Zm11.438-7.687v9.938h-2.02v-.92c-.562.703-1.411 1.138-2.556 1.138-2.081 0-3.805-1.8-3.805-4.128 0-2.33 1.724-4.128 3.805-4.128 1.145 0 1.99.439 2.556 1.138V8.716a1.01 1.01 0 0 1 2.02 0v.005Zm-2.02 6.028c0-1.313-.923-2.203-2.177-2.203s-2.164.89-2.164 2.203c0 1.312.923 2.203 2.164 2.203s2.177-.891 2.177-2.203Zm7.524 2.455c.722 0 1.345-.343 1.615-.782l1.99-.018c-.488 1.578-1.864 2.468-3.619 2.468-2.555 0-4.197-1.799-4.197-4.128s1.677-4.128 4.15-4.128c2.303 0 3.901 1.83 3.901 4.128 0 .296-.018.56-.079.83h-5.873c.265 1.108 1.11 1.625 2.116 1.625l-.004.005Zm1.815-3.207c-.235-1.126-1.049-1.564-1.894-1.564-1.08 0-1.802.577-2.051 1.564h3.95-.005Zm11.225-5.276v9.938h-2.02v-.92c-.562.703-1.411 1.138-2.556 1.138-2.086 0-3.806-1.8-3.806-4.128 0-2.33 1.725-4.128 3.806-4.128 1.141 0 1.99.439 2.556 1.138V8.716a1.01 1.01 0 0 1 2.02 0v.005Zm-2.02 6.028c0-1.313-.923-2.203-2.177-2.203s-2.164.89-2.164 2.203c0 1.312.923 2.203 2.164 2.203s2.177-.891 2.177-2.203Zm-65.51-5.002a1.374 1.374 0 1 0 0-2.746c-.76 0-1.376.615-1.376 1.373s.616 1.373 1.376 1.373Z"></path>
+                <defs>
+                    <linearGradient id="i475680957__a" x1="13" x2="13" y1="1" y2="25" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#fff" stop-opacity=".64"></stop>
+                        <stop offset="1" stop-color="#fff" stop-opacity=".32"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <div class="main-card">
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-bottom: .5rem; gap: 10px;">
+                <h1 class="title">Ready to Get Springloaded!</h1>
+                <div class="emoji-header">:)</div>
+            </div>
+            <p class="subtitle">
+                Bonjour Springloaded! I'm just applying. Here's everything you need to know about this human who wrote this application by hand (no AI, scout's honor! 🤚)
+            </p>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin: 1rem 0; flex-wrap: wrap;">
+                <img src="https://yesim.pages.dev/russel-scouts.gif" alt="scout's honor" style="width: 180px; height: auto; border-radius: 15px; animation: pulse 2s ease-in-out infinite;">
+                <div style="font-size: 2rem; animation: shake 0.5s ease-in-out infinite alternate;">👀</div>
+                <img src="https://yesim.pages.dev/liar.gif" alt="liar gif" style="width: 120px; height: auto; border-radius: 15px; animation: wiggle 1s ease-in-out infinite;">
+            </div>
+            <p style="font-size: 0.9rem; color: #666; font-style: italic; margin-bottom: 1rem;">
+                *nervous laughter* 🤞
+            </p>
+            <div class="buttons-container">
+                <a href="https://drive.google.com/file/d/1WxcCdKVEfwuYfCqimpFVU3fHWFwCKJBW/view?usp=sharing" class="cta-button btn-resume" target="_blank">
+                    Check Out My Resume here
+                </a>
+                <a href="motiv.html" class="cta-button btn-motivation">
+                    See My Motivation Level
+                </a>
+            </div>
+
+            <div class="fun-fact">
+                <h3>Fun Fact</h3>
+                <p>
+                    I need money. Turns out 'Stanford' + 'Master' + 'free' = false.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.cta-button');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            let konamiCode = [];
+            const konamiSequence = ['ArrowUp', 'ArrowDown'];
+            
+            document.addEventListener('keydown', function(e) {
+                konamiCode.push(e.code);
+                if (konamiCode.length > konamiSequence.length) {
+                    konamiCode.shift();
+                }
+                
+                if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                    document.body.style.animation = 'rainbow 2s infinite';
+                    setTimeout(() => {
+                        document.body.style.animation = '';
+                        alert('You found my easter egg, so you\'re forced to hire me!');
+                    }, 4000);
+                }
+            });
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                25% { filter: hue-rotate(90deg); }
+                50% { filter: hue-rotate(180deg); }
+                75% { filter: hue-rotate(270deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
